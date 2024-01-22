@@ -18,17 +18,20 @@ body{
     border: 0.5rem solid black;
 }
 .btn1{
-    background-color: purple;
+    background-color: red;
 }
 .btn2{
-    background-color: orange;
+    background-color: green;
 }
 .btn3{
-    background-color: orangered;
+    background-color: blue;
 }
 .btn4{
-    background-color: #ff0f;
+    background-color: yellow;
 }
 .flash{
     background-color: white;
+}
+.userflash{
+    background-color: green;
 }
