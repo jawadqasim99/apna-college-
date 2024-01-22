@@ -1,0 +1,34 @@
+body{
+    margin: 0 auto;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container{
+    display: flex;
+}
+.inner_div{
+    width: 6rem;
+    height:5rem;
+    background-color: blue;
+    margin: 2rem;
+    border-radius: 1rem;
+    border: 0.5rem solid black;
+}
+.btn1{
+    background-color: purple;
+}
+.btn2{
+    background-color: orange;
+}
+.btn3{
+    background-color: orangered;
+}
+.btn4{
+    background-color: #ff0f;
+}
+.flash{
+    background-color: white;
+}
