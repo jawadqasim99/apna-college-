@@ -1,0 +1,19 @@
+.container{
+    width: 50rem;
+    height: 20rem;
+    background-color: aquamarine;
+}
+.main{
+    display: flex;
+}
+.inner{
+    width: 10rem;
+    height: 5rem;
+    background-color:black;
+}
+ul{
+    background-color: blue;
+    width: 100%;
+    /* padding: 2rem; */
+    /* height: ; */
+}
