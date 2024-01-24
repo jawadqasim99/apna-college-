@@ -15,6 +15,8 @@
 
 // }
 // one way to send in this way 
-module.exports.sum =(a,b)=>a+b;
-module.exports.mul=(a,b)=>a*b;
+export const sum =(a,b)=>a+b;
+export let mul=(a,b)=>a*b;
 // module.exports=obj;
+// var cou=2;
+// module.exports=cou;
