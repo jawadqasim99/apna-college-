@@ -1,0 +1,119 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+
+}
+body{
+ background-color: #0E0F0A;
+    background-size: cover;
+   
+
+}
+.search_box{
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+   
+    
+    
+}
+button{
+    padding: 0.3rem;
+    width: 5rem;
+    font-size: 1rem;
+    background: rgb(251, 251, 251);
+    border: 2px solid transparent;
+    margin-left: 1rem;
+    border-radius: 4px;
+    box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;  
+    transition: all 0.1s ease 0s; 
+}
+button:hover{
+    border: 2px solid #282925;
+}
+#list{
+   
+    display: flex;
+    flex-direction: column;
+    /* align-items: c; */
+
+ 
+    margin-bottom: 1rem;
+}
+.list_item{
+    color: white;
+  
+   
+    margin-top:1rem;
+
+
+}
+input{
+  
+    color: rgb(36, 35, 42);
+    font-size: 1.2rem;
+    line-height: 20px;
+    min-height: 28px;
+    border-radius: 4px;
+    padding: 0.8rem 1rem;
+    border: 2px solid transparent;
+    box-shadow: rgb(103 31 55 / 12%) 0px 1px 3px, rgb(103 31 55 / 24%) 0px 1px 2px;
+    background: rgb(251, 251, 251);
+    transition: all 0.1s ease 0s;
+}
+
+input:focus{
+    border: 2px solid white;
+}
+
+
+.dis{
+    display: flex;
+    margin: 0 auto;
+   
+    justify-content: center;
+    width: 50%;
+    
+    background-color: #282925;
+    margin-top: 4rem;
+    border: 2px solid white;
+    border-radius: 1rem;
+}
+
+@media (max-width: 440px) {
+   .search_box{
+    flex-direction: column;
+    margin: 0.4rem;
+    align-items: center;
+    line-height: 4px;
+    
+   }
+  
+  }
+  @media (max-width : 600px) {
+    .dis{
+       /* display: none; */
+       display: flex;
+       justify-content: flex-start;
+      background: none;
+      border: none;
+      width: inherit;
+      margin-left: 2rem;
+       }
+       input{
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    color: rgb(36, 35, 42);
+    font-size: 1rem;
+    line-height: 10px;
+    min-height: 15px;
+    border-radius: 4px;
+    padding: 0.5rem 0.10rem;
+    width: 18rem;
+    border: 2px solid transparent;
+    box-shadow: rgb(103 31 55 / 12%) 0px 1px 3px, rgb(103 31 55 / 24%) 0px 1px 2px;
+    background: rgb(251, 251, 251);
+    transition: all 0.1s ease 0s;
+       }
+  }

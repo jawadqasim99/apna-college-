@@ -1,4 +1,4 @@
-let url='http://universities.hipolabs.com/search?name=';
+let url='http://universities.hipolabs.com/search?country=';
 
 
 let btn=document.querySelector("button");
@@ -10,18 +10,28 @@ let dataFinal=await fetchUni(input);
 console.log(dataFinal);
 
 show(dataFinal);
-// ul.appendchild("li");
+console.log(dataFinal);
+
 
 
 })
 function show(dataFinal) {
-    let ul=document.querySelector("ol");
+    let div=document.querySelector(".main");
+    let ul=document.querySelector("#list");
+   
+div.classList.add("dis");
+//    div.innerText='';
     ul.innerText='';
+
     for(col of dataFinal){
 let li=document.createElement("li");
+let h6=document.createElement("p");
 
-li.innerText=col.name   ;
+li.innerText=col.name;
+li.classList.add("list_item");
 ul.appendChild(li);
+h6.innerText=col.web_pages
+li.append(h6)
         
     }
  
