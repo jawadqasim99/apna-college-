@@ -6,6 +6,10 @@ const app = express();
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"/views"));
 
+// when get java and css file in ejs then we used this static 
+
+app.use(express.static(path.join(__dirname,"public")))
+
 app.listen(3000,(req , res)=>{
     console.log("Server Started");
 })
@@ -35,13 +39,14 @@ app.get("/rolldice",(req,res)=>{
     //         res.render("instagram.ejs");
     //        });
 
-    app.get("/id/:username" , (req , res)=>{
+   
+    app.get("/:username",(req,res)=>{
         let {username}=req.params;
         const instData=require("./data.json");
         const data=instData[username];
-      if(data){
-        res.render("instagram.ejs" , {data});
-      }else{
-        res.render("error.ejs" );
-      }
+        if(data){
+            res.render("instagram" , {data});
+        }else{
+           res.render("error") 
+        }
     })
