@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
 const path = require("path"); 
-var methodOverride = require('method-override')
+const methodOverride = require('method-override')
 
 const { v4: uuidv4 } = require('uuid');
-app.use(methodOverride('X-HTTP-Method-Override'))
+app.use(methodOverride('_method'))
 
 const port = 8080;
 
@@ -53,10 +53,25 @@ app.get("/posts/:id" ,(req,res)=>{
   res.render("details.ejs" , {post});
 
 })
+app.get("/posts/:id/edit" , (req,res)=>{
+    let {id}=req.params;
+    let post = posts.find((q)=> id === q.id);
+    res.render("edit.ejs" , {post});
+} )
 
 app.delete("/posts/:id" ,(req,res)=>{
 let {id} = req.params;
-console.log(id);
-let post = posts.find((q)=> id === q.id);
-res.send("success");
+ posts = posts.filter((q)=> id !== q.id);
+res.redirect("/posts")
 })
+
+app.patch("/posts/:id" , (req,res)=>{
+    let {id} = req.params;
+    let newContent=req.body.content;
+    let post = posts.find((q)=> id === q.id);
+    post.content=newContent;
+    res.redirect("/posts");
+
+    
+})
+

@@ -24,13 +24,13 @@
                 <div class="container">
                   <div id="del">
                     <h4><b><%= post.name %></b></h4> 
-                    <form method="post" action="/posts/<%=post.id%>?_method=DELETE"><button><i class="fa-solid fa-trash"></i></button></i></form>
+                    <form method="post" action="/posts/<%=post.id%>?_method=DELETE"><button style="background: none; border: none; cursor: pointer;"><i class="fa-solid fa-trash"></i></button></i></form>
                   </div>
                  
                   <p><%=post.content %></p> 
                  <div class="link">
                     <a href="http://localhost:8080/posts/<%= post.id %>" >See More details</a>
-                    <a href="#" class="details">Edit</a>
+                    <a href="http://localhost:8080/posts/<%= post.id %>/edit" class="details">Edit</a>
                  </div>
                 </div>
                

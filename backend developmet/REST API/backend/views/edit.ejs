@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+    <title>Document</title>
+   
+    <link rel="stylesheet" href="/form.css">
+
+  
+</head>
+<body>
+    <div id="form-main">
+        <div id="form-div">
+          <form class="form" id="form1" action="/posts/<%= post.id %>?_method=PATCH" method="post">
+            
+            <h5 style="color: white;">
+             User ID: <%= post.id %>
+
+            </h5>
+            <h3 style="color: white;">
+                User Name: <%= post.name %>
+   
+            </h3>
+            
+           
+            <p class="text">
+              <textarea name="content" class="validate[required,length[6,300]] feedback-input" id="comment" placeholder="Content"><%= post.content %></textarea>
+            </p>
+            
+            
+            <div class="submit">
+              <input type="submit" value="Updated" id="button-blue"/>
+              <div class="ease"></div>
+            </div>
+          </form>
+          <a href="http://localhost:8080/posts">Back</a>
+        </div>
+</body>
+</html>
