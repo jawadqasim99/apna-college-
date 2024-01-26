@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <title>Post Details</title>
+    <style>
+        .main-container{
+            display: flex;
+            justify-content: center;
+           height: 100vh;
+        }
+        .link{
+            position: absolute;
+            bottom: 1rem;
+        }
+        #del{
+          display: flex;
+          justify-content: center;
+          margin: 1rem 0 3rem 0;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="main-container">
+        
+          
+                <div class="card">
+                  
+                    <div class="container">
+                        <h5>User ID: <%= post.id %></h5>
+                      <div id="del">
+                        <h4><b><%= post.name %></b></h4> 
+                        
+                      </div>
+                     
+                      <p><%=post.content %></p> 
+                     <div class="link">
+                        <a href="http://localhost:8080/posts" >Back</a>
+                    
+                     </div>
+                    </div>
+                   
+                  </div>
+          
+    
+            
+         
+        </div>
+    
+</body>
+</html>
