@@ -2,8 +2,18 @@ const express = require("express");
 const app = express();
 const path = require("path"); 
 const methodOverride = require('method-override')
+const mysql=require("mysql2");
+// Create the connection to database
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    database: 'Qoura',
+    password:"112233ww@W"
+  });
 
-const { v4: uuidv4 } = require('uuid');
+
+
+// const { v4: uuidv4 } = require('uuid');
 app.use(methodOverride('_method'))
 
 const port = 8080;
@@ -14,27 +24,35 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,"public")));
 app.use(express.json());
 
-let posts=[
-    {
-        id:uuidv4(),
-        name:"Jawad Qasim",
-        content:"I love Coading ❤️"
-    },
-    {
-        id:uuidv4(),
-        name:"Ali raza",
-        content:"I love Fatima ❤️"
-    },
+// let posts=[
+//     {
+//         id:uuidv4(),
+//         name:"Jawad Qasim",
+//         content:"I love Coading ❤️"
+//     },
+//     {
+//         id:uuidv4(),
+//         name:"Ali raza",
+//         content:"I love Fatima ❤️"
+//     },
   
     
 
-]
+// ]
 
 app.listen(port , (req,res)=>{
     console.log("Server started");
 })
 app.get("/posts" , (req,res)=>{
-   res.render("index.ejs",{posts});
+  let q=`SELECT * FROM  postsData`;
+  try {
+    connection.query(q,(e,result)=>{
+        res.render("index.ejs" , {result});
+    })
+    
+  } catch (e) {
+    res.send("ERRor");
+  }
 })
 app.get("/posts/new",(req,res)=>{
     res.render("create.ejs");
