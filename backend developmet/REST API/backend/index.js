@@ -1,48 +1,35 @@
 const express = require("express");
-const app = express();
+const mysql=require("mysql2");
 const path = require("path"); 
 const methodOverride = require('method-override')
-const mysql=require("mysql2");
+const app = express();
+const port = 8080;
+
 // Create the connection to database
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'Qoura',
-    password:"112233ww@W"
-  });
+  host: 'localhost',
+  user: 'root',
+  database: 'Qoura',
+  password:"112233ww@W"
+});
 
-
-
-// const { v4: uuidv4 } = require('uuid');
-app.use(methodOverride('_method'))
-
-const port = 8080;
 
 app.set("view engine" , "ejs");
 app.set("views", path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,"public")));
 app.use(express.json());
+app.use(methodOverride('_method'));
 
-// let posts=[
-//     {
-//         id:uuidv4(),
-//         name:"Jawad Qasim",
-//         content:"I love Coading ❤️"
-//     },
-//     {
-//         id:uuidv4(),
-//         name:"Ali raza",
-//         content:"I love Fatima ❤️"
-//     },
-  
-    
-
-// ]
+// Stard a server.............
 
 app.listen(port , (req,res)=>{
     console.log("Server started");
 })
+
+
+
+// ....... Show all posts fetch data in database ................. 
 app.get("/posts" , (req,res)=>{
   let q=`SELECT * FROM  postsData`;
   try {
@@ -54,42 +41,99 @@ app.get("/posts" , (req,res)=>{
     res.send("ERRor");
   }
 })
+
 app.get("/posts/new",(req,res)=>{
     res.render("create.ejs");
 })
 
-app.post("/posts" , (req,res)=>{
-    let {name,content}=req.body;
-    let id=uuidv4();
-    posts.push({id,name,content})
-    res.redirect("/posts");
- 
-})
-app.get("/posts/:id" ,(req,res)=>{
-  let {id}=req.params;
-  let post = posts.find((q)=> id === q.id);
-  res.render("details.ejs" , {post});
+// ............... New Post Store in data base .......
 
+app.post("/posts" , (req,res)=>{
+    let {name:newUser,content:newContent}=req.body;
+   
+    let user=[[newUser,newContent]];
+ 
+    let q="INSERT INTO postsData (name,content ) VALUES ?";
+    try {
+      connection.query(q,[user],(e,result)=>{
+        if (e) throw e;
+          res.redirect("/posts");
+        
+      })
+    } catch (e) {
+      res.status(500).send("Internal Server Error");
+      return;
+    }
 })
+
+
+
+// ..................... Find post uing id ...................
+
+app.get("/posts/:id" ,(req,res)=>{
+  let {id:idUser}=req.params;
+  let q=`SELECT * FROM postsData WHERE id='${idUser}'`;
+  try {
+    
+    connection.query(q,(e,result)=>{
+      let post=result[0];
+      res.render("details.ejs" , {post});
+    })
+  } catch (e) {
+    res.status(500).send("Internal Server Error");
+  } 
+})
+
+
+//  Edit post fetch data from database
+
 app.get("/posts/:id/edit" , (req,res)=>{
     let {id}=req.params;
-    let post = posts.find((q)=> id === q.id);
-    res.render("edit.ejs" , {post});
+    let q=`SELECT * FROM postsData WHERE id='${id}'`;
+  try {
+    
+    connection.query(q,(e,result)=>{
+      let post=result[0];
+      res.render("edit.ejs" , {post});
+    })
+  } catch (e) {
+    res.status(500).send("Internal Server Error");
+  } 
+  
 } )
+
+app.patch("/posts/:id" , (req,res)=>{
+  let {id} = req.params;
+  let newContent=req.body.content;
+  let q=`SELECT * FROM postsData WHERE id='${id}'`;
+  try {
+    
+    connection.query(q,(e,result)=>{
+      let post=result[0];
+     let p=`UPDATE postsData SET content='${newContent}' WHERE id='${post.id}' `;
+     connection.query(p);
+     res.redirect("/posts");
+    })
+  } catch (e) {
+    res.status(500).send("Internal Server Error");
+  } 
+  // post.content=newContent;
+   
+})
+
+
+// Delete data using data base
 
 app.delete("/posts/:id" ,(req,res)=>{
 let {id} = req.params;
- posts = posts.filter((q)=> id !== q.id);
-res.redirect("/posts")
+let q=`DELETE FROM postsData WHERE id = '${id}'`;
+try {
+  connection.query(q);
+  res.redirect("/posts")
+} catch (e) {
+  res.status(500).send("Internal Server Error");
+}
 })
 
-app.patch("/posts/:id" , (req,res)=>{
-    let {id} = req.params;
-    let newContent=req.body.content;
-    let post = posts.find((q)=> id === q.id);
-    post.content=newContent;
-    res.redirect("/posts");
 
-    
-})
 
