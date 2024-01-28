@@ -111,14 +111,16 @@ app.patch("/posts/:id" , (req,res)=>{
     connection.query(q,(e,result)=>{
       let post=result[0];
      let p=`UPDATE postsData SET content='${newContent}' WHERE id='${post.id}' `;
-     connection.query(p);
-     res.redirect("/posts");
+    try {
+      connection.query(p);
+      res.redirect("/posts");
+    } catch (e) {
+      res.status(500).send("Internal Server Error");
+    }
     })
   } catch (e) {
     res.status(500).send("Internal Server Error");
-  } 
-  // post.content=newContent;
-   
+  }   
 })
 
 
