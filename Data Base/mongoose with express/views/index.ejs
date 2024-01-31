@@ -17,7 +17,7 @@
     <% for(let chat of allChats) {%>
       <div class="chats">
      <div class="buttons">
-        <form action="/chats/<%= chat._id %>?_method=DELETE" method="post"><button>Delete</button></form>
+        <form action="/chats/<%= chat._id %>?_method=DELETE" method="post"><button id="del">Delete</button></form>
         <form action="/chats/<%= chat._id %>" method="GET"><button>Edit</button></form>
      </div>
         <p>From: <%=chat.from %></p>
@@ -31,5 +31,6 @@
       
 
         <% } %>
+        <script src="/script.js"></script>
 </body>
 </html>
